@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <style type="text/css">
+            .world{width: 100%; font-size: 30px; border: 0px; text-align: center;}
+            #slider{
+                width: 90%;
+                margin: 17px;
+                margin-left: 5%;
+            }
+        </style>
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div id="slider"></div>
+        <div class='hello'>
+            <textarea class='world' type='text'></textarea>
+            
+        </div>
+        
+        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script type="text/javascript">
+            var slideVal = 1;
+             function intervalTrigger(){ return window.setInterval(function(){
+                        $('.world').val($('.world').val()+Math.random().toString(36).substring(7).substring(0,1))
+                        setTimeout(function(){
+                           $('.world').keypress();
+                        }, 500/slideVal);
+                    },1000/slideVal);
+                };
+            var trigger = intervalTrigger();
+            $(function() {
+                $( "#slider" ).slider({
+                    change: function( event, ui ) {
+                        console.log(event);
+                        console.log(ui);
+                        slideVal = ui.value;
+                        window.clearInterval(trigger);
+                        trigger = intervalTrigger();
+                         
+                    },
+                    max: 10,
+                    min: 1
+                });
+              });
+            var goal = "hello world";
+            goal=goal.split('');
+            var x = 0;
+            $('.hello .world').keypress(function(event){
+              
+                if(x < goal.length){
+                    var replace = $(this).val();
+                    replace = replace.substring(0, replace.length-1);
+                  
+                    $(this).val(replace);
+                    $(this).val($(this).val()+goal[x]);
+                    x++
+                } else{
+                    x = 0;
+                     var replace = $(this).val();
+                    replace = replace.substring(0, replace.length-1);
+                  
+                    $(this).val(replace+' ');
+               }
+            })
+
+
+            $(document).ready(function(){
+                $('.world').css('height', $(window).height()-50);
+               
+               
+            })
+
+        </script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+    </body>
+</html>
